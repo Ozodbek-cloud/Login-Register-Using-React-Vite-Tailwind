@@ -31,7 +31,7 @@ bg-gray-800">
                             <div className="flex flex-col gap-4">
                                 <input type="text" className="p-3 bg-gray-100 focus:outline-none rounded-2xl " placeholder="Name" />
                                 <input type="email" className="p-3 bg-gray-100 focus:outline-none rounded-2xl" placeholder="Email" />
-                                <input type="phone" className="p-3 bg-gray-100 focus:outline-none rounded-2xl" placeholder="Phone" />
+                                <input type="text" className="p-3 bg-gray-100 focus:outline-none rounded-2xl" placeholder="Phone" />
                                 <input type="password"  className="p-3 bg-gray-100 focus:outline-none rounded-2xl" placeholder="Password" />
                             </div>
                         </div>
