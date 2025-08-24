@@ -50,7 +50,9 @@ bg-gray-800">
                     </div>
                     <div className="flex justify-center items-center flex-col gap-4 mt-[20px] ">
                         <h3 className="text-[18px] transition-all duration-300 hover:underline text-[#fff] cursor-pointer"><Link to="/sign_up">Don't have an account?</Link></h3>
+                         <Link to="/">
                         <button onClick={handler} className="p-3 border  px-15 rounded-4xl font-bold text-[#fff] transition-all duration-300 hover:scale-[1.1] bg-purple-500 hover:bg-[#fff] hover:text-pink-500">SIGN IN</button>
+                         </Link>
                     </div>
                 </div>
             </div>
