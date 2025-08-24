@@ -5,22 +5,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function SignIn() {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-   async function handler() {
-       await axios.post("https://reqres.in/api/register", {
-            email: email,
-            password: password
-        })
-            .then(res => {
-                console.log("Success:", res.data);
-            })
-            .catch(err => {
-                console.error("Error:", err.response?.data || err.message);
-            });
-            console.log(email, password)
-    }
-
     return (
         <div className="h-screen 
 bg-gray-800">
@@ -44,14 +28,14 @@ bg-gray-800">
                     <div className="flex flex-col items-center justify-center gap-3 mt-[20px] text-[20px]">
                         <p className="text-[#fff]">or use your email for registration</p>
                         <div className="flex flex-col gap-4">
-                            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="p-3 bg-gray-100 focus:outline-none rounded-2xl" placeholder="Email" />
-                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="p-3 bg-gray-100 focus:outline-none rounded-2xl" placeholder="Password" />
+                            <input type="email"  className="p-3 bg-gray-100 focus:outline-none rounded-2xl" placeholder="Email" />
+                            <input type="password"  className="p-3 bg-gray-100 focus:outline-none rounded-2xl" placeholder="Password" />
                         </div>
                     </div>
                     <div className="flex justify-center items-center flex-col gap-4 mt-[20px] ">
                         <h3 className="text-[18px] transition-all duration-300 hover:underline text-[#fff] cursor-pointer"><Link to="/sign_up">Don't have an account?</Link></h3>
                          <Link to="/">
-                        <button onClick={handler} className="p-3 border  px-15 rounded-4xl font-bold text-[#fff] transition-all duration-300 hover:scale-[1.1] bg-purple-500 hover:bg-[#fff] hover:text-pink-500">SIGN IN</button>
+                        <button  className="p-3 border  px-15 rounded-4xl font-bold text-[#fff] transition-all duration-300 hover:scale-[1.1] bg-purple-500 hover:bg-[#fff] hover:text-pink-500">SIGN IN</button>
                          </Link>
                     </div>
                 </div>
