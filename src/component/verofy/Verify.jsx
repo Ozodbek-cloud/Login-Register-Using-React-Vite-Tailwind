@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Verify() {
   const [values, setValues] = useState(["", "", "", "", ""]);
   const inputsRef = useRef([]);
+  const navigate = useNavigate()
 
   const handleChange = (e, index) => {
     const newValues = [...values];
@@ -20,19 +22,35 @@ export default function Verify() {
       inputsRef.current[index - 1].focus();
     }
   };
-  if (values.length == 5) {
-    console.log(values)
-  }
+
+  useEffect(() => {
+    if (values.every((val) => val !== "")) {
+      const code = values.join(""); 
+      console.log("Auto submit code:", code);
+      let code_number = +code
+      axios
+        .post("https://register-login-verify.onrender.com/auth/verify", {email:'m7011 cderw2@gmail.com', code: code_number })
+        .then((res) => {
+          console.log("✅ Verification success:", res.data);
+          navigate("/sign_in")
+        })
+        .catch((err) => {
+          console.error("❌ Verification failed:", err);
+          alert("❌ Wrong code!");
+        });
+    }
+  }, [values]);
+
   return (
     <div className="h-screen bg-gray-800 flex justify-center items-center flex-col gap-6">
-       <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_8px_24px_rgba(236,72,153,0.25)]">
-        Verifiation Code Sent To Your Email !
+      <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_8px_24px_rgba(236,72,153,0.25)]">
+        Verification Code Sent To Your Email!
       </h1>
       <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_8px_24px_rgba(236,72,153,0.25)]">
         Authorization
       </h1>
 
-      <div className="flex gap-3">
+      <form className="flex gap-3">
         {values.map((val, index) => (
           <input
             key={index}
@@ -46,13 +64,10 @@ export default function Verify() {
                        bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-400 
                        bg-clip-text text-transparent 
                        border-2 border-indigo-400 drop-shadow-[0_8px_24px_rgba(236,72,153,0.25)]"
-            placeholder={["0", "0", "0", "0", "0"][index]}
+            placeholder="0"
           />
         ))}
-      </div>
-      <Link to="/sign_in">
-        <button  className="p-3 border  px-15 rounded-4xl font-bold text-[#fff] transition-all duration-300 hover:scale-[1.1] bg-purple-500 hover:bg-[#fff] hover:text-pink-500">SIGN IN</button>
-      </Link>
+      </form>
     </div>
   );
 }
